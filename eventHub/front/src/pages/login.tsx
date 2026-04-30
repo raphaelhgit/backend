@@ -38,6 +38,7 @@ export default function Login() {
               setformData({ ...formData, email: e.target.value })
             }
             className="border-black border-2"
+            placeholder="Indiquez votre email"
           />
           <input
             type="password"
@@ -47,6 +48,7 @@ export default function Login() {
               setformData({ ...formData, password: e.target.value })
             }
             className="border-black border-2"
+            placeholder="Indiquez votre mot de passe"
           />
           <button onClick={handleSubmit} className="border-black border-2">
             se connecter
