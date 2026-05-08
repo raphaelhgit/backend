@@ -90,148 +90,94 @@ export default function CreateEvent() {
     }
   }
 
-  return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col w-80 gap-4">
+  const inputCls = "border-black border-2 p-2 w-full";
+  const errCls = "text-red-500 text-sm";
 
-        <h1>Créer un événement</h1>
-        <button onClick={() => setPreview(!preview)}>
+  return (
+    <div className="max-w-5xl mx-auto p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Créer un événement</h1>
+        <button onClick={() => setPreview(!preview)} className="border-black border-2 px-4 py-2">
           {preview ? "Masquer l'aperçu" : "Prévisualiser"}
         </button>
       </div>
 
-      <div>
+      <div className={`grid gap-8 ${preview ? "grid-cols-2" : "grid-cols-1"}`}>
         {/* FORMULAIRE */}
-        <div>
+        <div className="flex flex-col gap-3">
           <div>
-            <input
-              type="text"
-              placeholder="Titre *"
-              value={form.title}
-              onChange={set("title")}
-            />
-            {errors.title && <p>{errors.title}</p>}
+            <input type="text" placeholder="Titre *" value={form.title} onChange={set("title")} className={inputCls} />
+            {errors.title && <p className={errCls}>{errors.title}</p>}
           </div>
 
           <div>
-            <textarea
-              placeholder="Description *"
-              value={form.description}
-              onChange={set("description")}
-              rows={4}
-            />
-            {errors.description && <p>{errors.description}</p>}
+            <textarea placeholder="Description *" value={form.description} onChange={set("description")} rows={4} className={inputCls} />
+            {errors.description && <p className={errCls}>{errors.description}</p>}
           </div>
 
-          <div>
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <label>Date *</label>
-              <input type="date" value={form.date} onChange={set("date")} />
-              {errors.date && <p>{errors.date}</p>}
+              <label className="text-sm">Date *</label>
+              <input type="date" value={form.date} onChange={set("date")} className={inputCls} />
+              {errors.date && <p className={errCls}>{errors.date}</p>}
             </div>
             <div>
-              <label>Heure *</label>
-              <input type="time" value={form.time} onChange={set("time")} />
-              {errors.time && <p>{errors.time}</p>}
+              <label className="text-sm">Heure *</label>
+              <input type="time" value={form.time} onChange={set("time")} className={inputCls} />
+              {errors.time && <p className={errCls}>{errors.time}</p>}
             </div>
           </div>
 
-          <div>
+          <div className="grid grid-cols-2 gap-3">
             <div>
-              <input
-                type="text"
-                placeholder="Lieu *"
-                value={form.location}
-                onChange={set("location")}
-              />
-              {errors.location && <p>{errors.location}</p>}
+              <input type="text" placeholder="Lieu *" value={form.location} onChange={set("location")} className={inputCls} />
+              {errors.location && <p className={errCls}>{errors.location}</p>}
             </div>
             <div>
-              <input
-                type="text"
-                placeholder="Ville *"
-                value={form.city}
-                onChange={set("city")}
-              />
-              {errors.city && <p>{errors.city}</p>}
+              <input type="text" placeholder="Ville *" value={form.city} onChange={set("city")} className={inputCls} />
+              {errors.city && <p className={errCls}>{errors.city}</p>}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <input type="number" placeholder="Prix (€) *" value={form.price} onChange={set("price")} min={0} step={0.01} className={inputCls} />
+              {errors.price && <p className={errCls}>{errors.price}</p>}
+            </div>
+            <div>
+              <input type="number" placeholder="Nombre de places *" value={form.totalPlaces} onChange={set("totalPlaces")} min={1} className={inputCls} />
+              {errors.totalPlaces && <p className={errCls}>{errors.totalPlaces}</p>}
             </div>
           </div>
 
           <div>
-            <div>
-              <input
-                type="number"
-                placeholder="Prix (€) *"
-                value={form.price}
-                onChange={set("price")}
-                min={0}
-                step={0.01}
-              />
-              {errors.price && <p>{errors.price}</p>}
-            </div>
-            <div>
-              <input
-                type="number"
-                placeholder="Nombre de places *"
-                value={form.totalPlaces}
-                onChange={set("totalPlaces")}
-                min={1}
-              />
-              {errors.totalPlaces && <p>{errors.totalPlaces}</p>}
-            </div>
-          </div>
-
-          <div>
-            <select value={form.category} onChange={set("category")}>
+            <select value={form.category} onChange={set("category")} className={inputCls}>
               <option value="">-- Catégorie * --</option>
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c}>{c}</option>
-              ))}
+              {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
-            {errors.category && <p>{errors.category}</p>}
+            {errors.category && <p className={errCls}>{errors.category}</p>}
           </div>
 
-          <div>
-            <input
-              type="url"
-              placeholder="URL de l'image (optionnel)"
-              value={form.image}
-              onChange={set("image")}
-            />
-          </div>
+          <input type="url" placeholder="URL de l'image (optionnel)" value={form.image} onChange={set("image")} className={inputCls} />
 
-          {apiError && <p>{apiError}</p>}
+          {apiError && <p className={errCls}>{apiError}</p>}
 
-          <div>
-            <button onClick={handleSubmit}>Créer l'événement</button>
-            <button onClick={() => navigate("/organizer/events")}>Annuler</button>
+          <div className="flex gap-3">
+            <button onClick={handleSubmit} className="border-black border-2 px-6 py-2 font-bold">Créer l'événement</button>
+            <button onClick={() => navigate("/organizer/events")} className="border-black border-2 px-6 py-2">Annuler</button>
           </div>
         </div>
 
         {/* PRÉVISUALISATION */}
         {preview && (
-          <div>
-            <h2>Aperçu</h2>
-            {form.image && (
-              <img
-                src={form.image}
-                alt="couverture"
-                onError={(e) => (e.currentTarget.style.display = "none")}
-              />
-            )}
-            <h3>{form.title || "Titre de l'événement"}</h3>
-            <p>
-              {form.category || "Catégorie"}
-              {form.city ? ` · ${form.city}` : ""}
-            </p>
-            <p>
-              {form.date || "Date"}
-              {form.time ? ` à ${form.time}` : ""}
-              {form.location ? ` · ${form.location}` : ""}
-            </p>
-            <p>{form.description || "Description de l'événement..."}</p>
-            <p>{form.price !== "" ? `${form.price} €` : "Prix"}</p>
-            <p>{form.totalPlaces ? `${form.totalPlaces} places` : "Places"}</p>
+          <div className="border-black border-2 p-4 flex flex-col gap-2 self-start">
+            <h2 className="font-bold border-b pb-2">Aperçu</h2>
+            {form.image && <img src={form.image} alt="couverture" className="w-full h-40 object-cover" onError={(e) => (e.currentTarget.style.display = "none")} />}
+            <h3 className="font-bold text-lg">{form.title || "Titre de l'événement"}</h3>
+            <p className="text-sm">{form.category || "Catégorie"}{form.city ? ` · ${form.city}` : ""}</p>
+            <p className="text-sm">{form.date || "Date"}{form.time ? ` à ${form.time}` : ""}{form.location ? ` · ${form.location}` : ""}</p>
+            <p className="text-sm">{form.description || "Description..."}</p>
+            <p className="font-bold">{form.price !== "" ? `${form.price} €` : "Prix"} · {form.totalPlaces ? `${form.totalPlaces} places` : "Places"}</p>
           </div>
         )}
       </div>

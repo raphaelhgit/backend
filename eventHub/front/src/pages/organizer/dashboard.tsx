@@ -33,27 +33,26 @@ export default function Dashboard() {
     loadStats();
   }, []);
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="p-6">Chargement...</p>;
+  if (error) return <p className="p-6 text-red-500">{error}</p>;
   if (!stats) return null;
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="flex flex-col w-80 gap-4">
+    <div className="max-w-xl mx-auto p-6 flex flex-col gap-6">
+      <h1 className="text-2xl font-bold">Dashboard organisateur</h1>
 
-      <h1>Dashboard organisateur</h1>
-      <nav>
-        <Link to="/organizer/events">Mes événements</Link>
-        {" | "}
-        <Link to="/organizer/events/new">Créer un événement</Link>
-      </nav>
-      <hr />
-      <p>Événements créés : {stats.totalEvents}</p>
-      <p>Billets vendus : {stats.totalTicketsSold}</p>
-      <p>Billets valides : {stats.validTickets}</p>
-      <p>Billets utilisés : {stats.usedTickets}</p>
-      <p>Billets annulés : {stats.cancelledTickets}</p>
-      <p>Chiffre d'affaires : {stats.totalRevenue} €</p>
+      <div className="flex gap-2">
+        <Link to="/organizer/events" className="border-black border-2 px-4 py-2">Mes événements</Link>
+        <Link to="/organizer/events/new" className="border-black border-2 px-4 py-2">Créer un événement</Link>
+      </div>
+
+      <div className="border-black border-2 p-4 flex flex-col gap-2">
+        <p>Événements créés : <span className="font-bold">{stats.totalEvents}</span></p>
+        <p>Billets vendus : <span className="font-bold">{stats.totalTicketsSold}</span></p>
+        <p>Billets valides : <span className="font-bold">{stats.validTickets}</span></p>
+        <p>Billets utilisés : <span className="font-bold">{stats.usedTickets}</span></p>
+        <p>Billets annulés : <span className="font-bold">{stats.cancelledTickets}</span></p>
+        <p>Chiffre d'affaires : <span className="font-bold">{stats.totalRevenue} €</span></p>
       </div>
     </div>
   );

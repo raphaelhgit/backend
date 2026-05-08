@@ -13,6 +13,7 @@ const CreateEvent = lazy(() => import("./pages/organizer/createEvent.tsx"));
 const Dashboard = lazy(() => import("./pages/organizer/dashboard"));
 const EditEvent = lazy(() => import("./pages/organizer/editEvent"));
 const Event = lazy(() => import("./pages/organizer/event"));
+const EventDetail = lazy(() => import("./pages/eventDetail"));
 
 const root = document.getElementById("root");
 if (!root) throw new Error("Élément root introuvable");
@@ -33,6 +34,7 @@ ReactDOM.createRoot(root).render(
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/organizer/events/:id/edit" element={<EditEvent />} />
               <Route path="/organizer/events" element={<Event />} />
+              <Route path="/events/:id" element={<EventDetail />} />
             </Route>
           </Routes>
         </Suspense>

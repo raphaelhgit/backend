@@ -27,6 +27,7 @@ export default defineConfig({
       "/auth": "http://localhost:3000",
       "/events": "http://localhost:3000",
       "/organizer": "http://localhost:3000",
+      "/tickets": "http://localhost:3000",
     },
   },
 });
